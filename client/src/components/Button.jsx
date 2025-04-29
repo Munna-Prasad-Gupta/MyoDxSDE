@@ -35,21 +35,22 @@ border: 1px solid ${({ theme }) => theme.secondary};
     `
   opacity: 0.8;
   cursor: not-allowed;
-
   `}
+
   ${({ isLoading }) =>
     isLoading &&
     `
     opacity: 0.8;
   cursor: not-allowed;
 `}
-${({ flex }) =>
+
+  ${({ flex }) =>
     flex &&
     `
     flex: 1;
 `}
 
-${({ small }) =>
+  ${({ small }) =>
     small &&
     `
 padding: 10px 28px;
@@ -67,7 +68,7 @@ color: ${theme.primary};
   width: 100%;`}
 `;
 
-const button = ({
+const ButtonComponent = ({
   text,
   isLoading,
   isDisabled,
@@ -90,6 +91,7 @@ const button = ({
       small={small}
       outlined={outlined}
       full={full}
+      // Don't pass isLoading or isDisabled to the div directly
     >
       {isLoading && (
         <CircularProgress
@@ -104,4 +106,4 @@ const button = ({
   );
 };
 
-export default button;
+export default ButtonComponent;

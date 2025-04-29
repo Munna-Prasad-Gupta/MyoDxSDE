@@ -80,15 +80,20 @@ const Desc = styled.div`
   }
 `;
 
-const CountsCard = ({ item, data }) => {
+
+
+
+const CountsCard = ({ item, data ,showPercentageChange = true}) => {
+  const value = data?.[item.key];
+  
   return (
     <Card>
       <Left>
         <Title>{item.name}</Title>
         <Value>
-          {data && data[item.key].toFixed(2)}
+          {value !== undefined && value !== null ? value.toFixed(2) : "N/A"}
           <Unit>{item.unit}</Unit>
-          <Span positive>(+10%)</Span>
+          {showPercentageChange && <Span positive>(+10%)</Span>}
         </Value>
         <Desc>{item.desc}</Desc>
       </Left>

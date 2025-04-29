@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LogoImg from "../utils/Images/Logo.png";
+import LogoImg from "../utils/Images/MyoLogo.jpg";
+// import LogoImg from "../utils/Images/Logo.png";
 import { Link as LinkR, NavLink } from "react-router-dom";
 import { MenuRounded } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/userSlice";
+import { keyframes } from "styled-components";
+
+
+const pulse = keyframes`
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+`;
+
 
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -81,6 +91,12 @@ const Navlink = styled(NavLink)`
     color: ${({ theme }) => theme.primary};
     border-bottom: 1.8px solid ${({ theme }) => theme.primary};
   }
+  
+   &.pulse-highlight {
+    animation: ${pulse} 1s ease-in-out infinite;
+    color:  #007bff;; /* Set color to blue */
+    font-weight: 700; /* Increase font weight */
+  }
 `;
 
 const UserContainer = styled.div`
@@ -138,27 +154,31 @@ const Navbar = ({ currentUser }) => {
         </Mobileicon>
         <NavLogo to="/">
           <Logo src={LogoImg} />
-          Fittrack
+          MyoDx
         </NavLogo>
 
         <MobileMenu isOpen={isOpen}>
           <Navlink to="/">Dashboard</Navlink>
-          <Navlink to="/workouts">Workouts</Navlink>
-          <Navlink to="/tutorials">Tutorials</Navlink>
-          <Navlink to="/blogs">Blogs</Navlink>
+          <Navlink to="/Diagnosis">Diagnosis</Navlink>
+          <Navlink to="/Reports">Reports</Navlink>
+          <Navlink to="/Educational">Educational</Navlink>
           <Navlink to="/contact">Contact</Navlink>
+          <Navlink to="/fastQA" className="pulse-highlight">FastQ/A</Navlink>
         </MobileMenu>
 
         <NavItems>
-          <Navlink to="/">Dashboard</Navlink>
-          <Navlink to="/workouts">Workouts</Navlink>
-          <Navlink to="/tutorials">Tutorials</Navlink>
-          <Navlink to="/blogs">Blogs</Navlink>
+        <Navlink to="/">Dashboard</Navlink>
+          <Navlink to="/Diagnosis">Diagnosis</Navlink>
+          <Navlink to="/Reports">Reports</Navlink>
+          <Navlink to="/Educational">Educational</Navlink>
           <Navlink to="/contact">Contact</Navlink>
+          <Navlink to="/fastQA" className="pulse-highlight">FastQ/A</Navlink>
         </NavItems>
 
         <UserContainer>
-          <Avatar src={currentUser?.img}>{currentUser?.name[0]}</Avatar>
+        <Avatar src={currentUser?.img}>
+        {currentUser?.name ? currentUser.name[0] : ""}
+      </Avatar>
           <TextButton onClick={() => dispatch(logout())}>Logout</TextButton>
         </UserContainer>
       </NavContainer>

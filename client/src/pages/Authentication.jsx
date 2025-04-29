@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import { Fragment } from 'react';
+
 import styled from "styled-components";
 import LogoImage from "../utils/Images/Logo.png";
-import AuthImage from "../utils/Images/AuthImage.jpg";
+import AuthImage from "../utils/Images/AuthImage.png";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
+
+import AdminSignIn from '../components/AdminSignIn';
+import AdminSignUp from '../components/AdminSignUp';
 
 const Container = styled.div`
   flex: 1;
@@ -62,35 +68,112 @@ const TextButton = styled.span`
   font-weight: 600;
 `;
 
+
+
+
+
 const Authentication = () => {
+  const location = useLocation();
   const [login, setLogin] = useState(false);
+  const [isAdminMode, setIsAdminMode] = useState(false);
+
+  // Ensure the component re-renders by using a key based on location state
+  const key = location.state?.key || null; // Use key to force re-render
+
+  // Check if we need to show the AdminSignUp component
+  useEffect(() => {
+    if (location.state?.showAdminSignUp) {
+      setIsAdminMode(true);
+      setLogin(true);
+    } else if (location.state?.showAdminSignIn) {
+      setIsAdminMode(true);
+      setLogin(false);
+    }else if(location.state?.showUserSignUp){
+      setIsAdminMode(false);
+      setLogin(true);
+    }else if(location.state?.showUserSignIn){
+      setIsAdminMode(false);
+      setLogin(false);
+
+    }
+  }, [location.state]);
+
+  // Function to toggle between regular and admin modes
+  const toggleAdminMode = () => {
+    setIsAdminMode(!isAdminMode);
+    setLogin(false); // Reset regular user mode
+  };
+
   return (
+    
     <Container>
       <Left>
         <Logo src={LogoImage} />
         <Image src={AuthImage} />
       </Left>
       <Right>
-        {!login ? (
-          <>
-            <SignIn />
-            <Text>
-              Don't have an account?{" "}
-              <TextButton onClick={() => setLogin(true)}>SignUp</TextButton>
-            </Text>
-          </>
+      <Fragment key={key}>
+        {isAdminMode ? (
+          // Admin Authentication Components
+          !login ? (
+            <>
+              <AdminSignIn />
+              <Text>
+                New Admin GoAhead?{" "}
+                <TextButton onClick={() => setLogin(true)}>SignUpAsAdmin</TextButton>
+              </Text>
+            </>
+          ) : (
+            <>
+              <AdminSignUp />
+              <Text>
+                Already have Admin account?{" "}
+                <TextButton onClick={() => setLogin(false)}>SignInAsAdmin</TextButton>
+              </Text>
+            </>
+          )
         ) : (
-          <>
-            <SignUp />
-            <Text>
-              Already have an account?{" "}
-              <TextButton onClick={() => setLogin(false)}>SignIn</TextButton>
-            </Text>
-          </>
+          // Regular User Authentication Components
+          !login ? (
+            <>
+              <SignIn />
+              <Text>
+                Don't have an account?{" "}
+                <TextButton onClick={() => setLogin(true)}>SignUp</TextButton>
+              </Text>
+            </>
+          ) : (
+            <>
+              <SignUp />
+              <Text>
+                Already have an account?{" "}
+                <TextButton onClick={() => setLogin(false)}>SignIn</TextButton>
+              </Text>
+            </>
+          )
         )}
+
+
+        {!isAdminMode ? (
+            <TextButton onClick={toggleAdminMode} style={{ marginBottom: '20px' }}>
+              Go to Admin Authentication
+            </TextButton>
+          ) : (
+            <TextButton onClick={toggleAdminMode} style={{ marginBottom: '20px' }}>
+              Go to User Authentication
+            </TextButton>
+        )}
+       </Fragment>
       </Right>
     </Container>
+    
   );
 };
 
 export default Authentication;
+
+
+
+
+
+

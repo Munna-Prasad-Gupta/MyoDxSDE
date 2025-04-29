@@ -1,0 +1,7 @@
+the below is for client 
+Client : npm install styled-components @mui/material @mui/lab @mui/icons-material @emotion/styled @emotion/react axios react-router-dom react-redux redux-persist @reduxjs/toolkit dayjs @mui/x-charts @mui/x-date-pickers
+
+
+the below is for server 
+
+Server: npm install bcrypt cors dotenv express jsonwebtoken mongoose

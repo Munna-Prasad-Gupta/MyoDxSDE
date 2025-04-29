@@ -1,7 +1,6 @@
-// eslint-disable-next-line import/prefer-default-export
+// In error.js (utility to create errors)
 export const createError = (status, message) => {
-  const err = new Error();
+  const err = new Error(message); // Passing message to the Error constructor
   err.status = status;
-  err.message = message;
   return err;
 };
