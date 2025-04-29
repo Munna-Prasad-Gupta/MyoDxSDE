@@ -1,6 +1,6 @@
 
 import express from "express";
-import { UserLogin, UserRegister,ForgotPassword ,CheckPresentorNots} from "../controllers/user.js";
+import { UserLogin, UserRegister,ForgotPassword ,CheckPresentorNots} from "../controllers/User.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 import User from "../models/User.js";
 
