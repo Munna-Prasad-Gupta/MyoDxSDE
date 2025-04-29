@@ -1,1 +1,21 @@
+# Node modules
 **/node_modules/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+*.env
+
+# Logs and system files
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE folders
+.vscode/
+
+# Don't ignore .pkl!
+# (Make sure this line is NOT here: *.pkl)
