@@ -8,7 +8,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {forgotpassword} from 'D:/mdProject/mdProject/client/src/api/index';
+import {forgotpassword} from '../api/index';
 
 function ForgotPassword() {
     const navigate = useNavigate();
