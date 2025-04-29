@@ -1,7 +1,11 @@
 import axios from "axios";
 
+// const API = axios.create({
+//   baseURL:process.env.REACT_APP_API_URL + "/api/",
+// });
+
 const API = axios.create({
-  baseURL:process.env.REACT_APP_API_URL + "/api/",
+  baseURL: process.env.REACT_APP_API_URL.replace(/\/$/, '') + "/api/",
 });
 
 export const UserSignUp = async (data) => API.post("/user/signup", data);
