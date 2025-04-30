@@ -65,13 +65,13 @@ function App() {
                 </Container>
               }
             /> */}
-            <Container>
+            
             {currentUser ? (
-              <Route path="/*" element={<ProtectedRoutes currentUser={currentUser} />} />
+              <Route path="/*" element={<Container><ProtectedRoutes currentUser={currentUser} /> </Container>} />
             ) : (
-              <Route path="/*" element={<Authentication />} />
+              <Route path="/*" element={<Container><Authentication /></Container>} />
             )}
-            </Container>
+            
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
