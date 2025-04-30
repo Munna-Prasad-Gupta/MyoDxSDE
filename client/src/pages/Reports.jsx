@@ -111,7 +111,7 @@ const fetchUserDetails = async () => {
     const token = localStorage.getItem("token");
     if (!token) return null;
 
-    const response = await fetch("http://localhost:8080/api/user/me", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/me`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -151,7 +151,7 @@ const Report = () => {
       if (!user || !user._id) return;
 
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/diagnosis`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diagnosis`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
