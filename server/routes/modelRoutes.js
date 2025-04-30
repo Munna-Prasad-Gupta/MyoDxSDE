@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Absolute path to the Python script
-const pythonScriptPath = join(__dirname, '..', 'model-wrapper', 'model.py');
+const pythonScriptPath = join(__dirname, '..', 'modelWrapper', 'model.py');
 
 // Absolute path to Python inside your conda environment
 // const pythonExePath = 'C:\\Users\\munna\\miniconda3\\envs\\myenv\\python.exe';
