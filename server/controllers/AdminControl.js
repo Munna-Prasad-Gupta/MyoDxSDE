@@ -122,7 +122,9 @@ export const AdminForgotPassword = async (req, res, next) => {
     await user.save();
 
     // Construct reset URL
-    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`; // adjust as needed
+    // const resetUrl = `http://localhost:3000/reset-password/${resetToken}`; // adjust as needed
+    const resetUrl = `https://myodxsdebymunnaprasad.onrender.com/reset-password/${resetToken}`;
+
 
     // Send email
     const transporter = nodemailer.createTransport({
