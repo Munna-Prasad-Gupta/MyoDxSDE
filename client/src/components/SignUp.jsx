@@ -28,6 +28,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [sumit, setSumit] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -71,32 +72,34 @@ const SignUp = () => {
         } catch (err) {
             setLoading(false);
             setButtonDisabled(false);
-
+            
             if (err.response) {
-                if (err.response.status === 409) {
-                    window.Toastify({ text: "📧 Email is already in use. Please try another email.", duration: 4000, gravity: "top", position: "center", style: { background: "rgba(220, 53, 69, 0.2)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", color: "#fff", fontWeight: "500", fontSize: "16px", padding: "14px 28px", borderRadius: "12px", boxShadow: "0 8px 20px rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", textAlign: "center" }, close: true, stopOnFocus: true }).showToast();
-
-                } else {
-                    // Handle other error responses
-                    alert(err.response.data.message || "An error occurred. Please try again later.");
-                }
-
+              if (err.response.status === 409) {
+                window.Toastify({ text: "📧 Email is already in use. Please try another email.", duration: 4000, gravity: "top", position: "center", style: { background: "rgba(220, 53, 69, 0.2)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", color: "#fff", fontWeight: "500", fontSize: "16px", padding: "14px 28px", borderRadius: "12px", boxShadow: "0 8px 20px rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", textAlign: "center" }, close: true, stopOnFocus: true }).showToast();
                 
-            } else {
+                } else {
+                  // Handle other error responses
+                  alert(err.response.data.message || "An error occurred. Please try again later.");
+                }
+                
+                
+              } else {
                 window.Toastify({ text: "❌ An error occurred. Please check your connection and try again.", duration: 4000, gravity: "top", position: "center", style: { background: "rgba(220, 53, 69, 0.2)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", color: "#fff", fontWeight: "500", fontSize: "16px", padding: "14px 28px", borderRadius: "12px", boxShadow: "0 8px 20px rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", textAlign: "center" }, close: true, stopOnFocus: true }).showToast();
-
+                
+              }
             }
-        }
-
-        console.log("SignUp try catch  done");
-    }
+            
+            console.log("SignUp try catch  done");
+     }
+          setLoading(false);
+          setButtonDisabled(false);
 };
 
 
   const responseGoogle = async (authResult) => {
     try {
       if (authResult['code']) {
-        setLoading(true);
+        setSumit(true);
         setButtonDisabled(true);
         try {
           // Send the code to the backend for authentication
@@ -108,7 +111,7 @@ const SignUp = () => {
           localStorage.setItem("token", res.data.token);
           // const presentornot = await CheckPresentorNots({ userId: res.data.user._id });
           dispatch(loginSuccess(res.data));
-          setLoading(false);
+          setSumit(false);
           setButtonDisabled(false);
           
           // Redirect to the home/dashboard page
@@ -142,7 +145,7 @@ const SignUp = () => {
 
           }
           
-          setLoading(false);
+          setSumit(false);
           setButtonDisabled(false);
         }
       }
@@ -153,7 +156,7 @@ const SignUp = () => {
 
     } finally {
       // Reset loading and disabled states
-      setLoading(false);
+      setSumit(false);
       setButtonDisabled(false);
       
     }
@@ -256,7 +259,7 @@ const SubTitle = styled.h2`
         <Button
           text="Continue With Google"
           onClick={googleLogin}
-          isLoading={loading}
+          isLoading={sumit}
           isDisabled={buttonDisabled}
         />
       </div>
