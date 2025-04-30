@@ -11,7 +11,8 @@ const __dirname = dirname(__filename);
 const pythonScriptPath = join(__dirname, '..', 'model-wrapper', 'model.py');
 
 // Absolute path to Python inside your conda environment
-const pythonExePath = 'C:\\Users\\munna\\miniconda3\\envs\\myenv\\python.exe';
+// const pythonExePath = 'C:\\Users\\munna\\miniconda3\\envs\\myenv\\python.exe';
+const pythonExePath = 'python3'; // or just 'python' if Render has only one version
 
 export function runPythonScript(inputData) {
   return new Promise((resolve, reject) => {

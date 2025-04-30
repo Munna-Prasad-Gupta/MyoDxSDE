@@ -81,7 +81,8 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: 'https://myodxsdebymunnaprasad.onrender.com'
+  origin: 'https://myodxsdebymunnaprasad.onrender.com',
+  credentials: true
 }));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
