@@ -75,7 +75,7 @@ const DiagnosisForm = () => {
           return;
         }
   
-        const userResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/user/me`, {
+        const userResponse = await fetch(`${process.env.REACT_APP_API_URL}api/user/me`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const DiagnosisForm = () => {
       const token = localStorage.getItem("token");
       if (!token) return null;
   
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/me`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}api/user/me`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -295,7 +295,7 @@ const DiagnosisForm = () => {
           user: user._id,  // Add the logged-in user's ID
         };
         
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diagnosis`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}api/diagnosis`, {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",

@@ -66,7 +66,7 @@ const Dashboard = () => {
           return;
         }
 
-        const userResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/user/me`, {
+        const userResponse = await fetch(`${process.env.REACT_APP_API_URL}api/user/me`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const Dashboard = () => {
         setUserId(user._id); 
 
         const diagnosisResponse = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/diagnosis/user/${user._id}`,
+          `${process.env.REACT_APP_API_URL}api/diagnosis/user/${user._id}`,
           {
             method: "GET",
             headers: {
