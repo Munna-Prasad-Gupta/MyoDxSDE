@@ -13,9 +13,12 @@ import {forgotpassword} from '../api/index';
 function ForgotPassword() {
     const navigate = useNavigate();
     const [email,setEmail] = useState("");
+    const [sumit,setSumit] = useState(false);
     const handleSubmit = async(e)=>{
+        setSumit(true);
         e.preventDefault();
         if (!email) {
+            setSumit(false);
             // alert("Please fill the email already logged in ");
             window.Toastify({ text: "⚠️ Please fill the email already logged in", duration: 4000, gravity: "top", position: "center", style: { background: "rgba(255, 193, 7, 0.2)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", color: "#fff", fontWeight: "500", fontSize: "16px", padding: "14px 28px", borderRadius: "12px", boxShadow: "0 8px 20px rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", textAlign: "center" }, close: true, stopOnFocus: true }).showToast();
 
@@ -45,6 +48,7 @@ function ForgotPassword() {
 
             }
         }
+        setSumit(false);
     }
 
 
@@ -106,7 +110,10 @@ function ForgotPassword() {
                         style={inputStyle}
                     />
                 </div>
-                <button type="submit" style={buttonStyle}>Submit</button>
+                {/* <button type="submit" style={buttonStyle}>Submit</button> */}
+                <button type="submit" style={buttonStyle} disabled={sumit}>
+    { sumit ? "Submitting..." : "Submit"}
+  </button>
             </form>
         </div>
     );

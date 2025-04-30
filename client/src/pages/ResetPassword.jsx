@@ -10,6 +10,7 @@ function ResetPassword() {
     console.log('Token received:', token);
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [sumit, setSumit] = useState(false);
     const [error, setError] = useState(null);
     const [isTokenValid, setIsTokenValid] = useState(false);
 const [isCheckingToken, setIsCheckingToken] = useState(true); // NEW
@@ -62,13 +63,15 @@ const [isCheckingToken, setIsCheckingToken] = useState(true); // NEW
 
     const handleReset = async (e) => {
         e.preventDefault();
-      
+        setSumit(true);
+        
         // Check if the new password matches the confirm password
         if (newPassword !== confirmPassword) {
             // alert("Passwords do not match!");
             window.Toastify({ text: "❌ Passwords do not match!", duration: 4000, gravity: "top", position: "center", style: { background: "rgba(220, 53, 69, 0.2)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", color: "#fff", fontWeight: "500", fontSize: "16px", padding: "14px 28px", borderRadius: "12px", boxShadow: "0 8px 20px rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.2)", textAlign: "center" }, close: true, stopOnFocus: true }).showToast();
-
+            
             setError("Passwords do not match.");
+            setSumit(false);
             
             // Optionally, you can reload the page after password mismatch
             window.location.reload(); // Refresh the page to reset the form
@@ -115,6 +118,7 @@ const [isCheckingToken, setIsCheckingToken] = useState(true); // NEW
 
             }
         }
+        setSumit(false);
     };
     
 
@@ -190,7 +194,11 @@ const [isCheckingToken, setIsCheckingToken] = useState(true); // NEW
                     style={inputStyle}
                     />
                 </div>
-                <button type="submit" style={buttonStyle}>Submit</button>
+                {/* <button type="submit" style={buttonStyle}>Submit</button> */}
+                <button type="submit" style={buttonStyle} disabled={sumit}>
+  {sumit ? "Submitting..." : "Submit"}
+</button>
+
                 </form>
             ) : (
                 <p style={{ color: "red" }}>{error || "Invalid or expired token."}</p>

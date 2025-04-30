@@ -38,6 +38,7 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [sumit, setSumit] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -125,7 +126,7 @@ const SignIn = () => {
         return;
       }
   
-      setLoading(true);
+      setSumit(true);
       setButtonDisabled(true);
   
       const res = await AdmingoogleAuthSignUp({ code, secret });
@@ -154,7 +155,7 @@ const SignIn = () => {
       navigate("/", { state: { showAdminSignUp: true, key: new Date().getTime() } });
   
     } finally {
-      setLoading(false);
+      setSumit(false);
       setButtonDisabled(false);
     }
   };
@@ -332,12 +333,14 @@ const SubTitle = styled.h2`
         <Button
   text="AdminSignIn"
   onClick={handelSignIn}
-  // isLoading={loading}  // Properly passing to custom Button
-  // isDisabled={buttonDisabled}
+  isLoading={loading}  // Properly passing to custom Button
+  isDisabled={buttonDisabled}
 />
 <Button
   text="Continue With Google as Admin"
+  isLoading={sumit}  // Properly passing to custom Button
   onClick={googleLogin}
+  isDisabled={buttonDisabled}
 />
 {showSecretKeyInput && (
           <div style={modalOverlayStyle}>

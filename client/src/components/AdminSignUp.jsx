@@ -35,6 +35,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [sumit, setSumit] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -97,7 +98,7 @@ const SignUp = () => {
         return;
       }
   
-      setLoading(true);
+      setSumit(true);
       setButtonDisabled(true);
   
       const res = await AdmingoogleAuthSignUp({ code, secret });
@@ -124,7 +125,7 @@ const SignUp = () => {
       navigate("/", { state: { showAdminSignUp: true, key: new Date().getTime() } });
   
     } finally {
-      setLoading(false);
+      setSumit(false);
       setButtonDisabled(false);
     }
   };
@@ -301,7 +302,7 @@ Create a secure admin account to manage users and oversee diagnostics. </SubTitl
         <Button
           text="Continue With Google As Admin"
           onClick={googleLogin}
-          isLoading={loading}
+          isLoading={sumit}
           isDisabled={buttonDisabled}
         />
 

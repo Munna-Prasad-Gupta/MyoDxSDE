@@ -76,6 +76,7 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [sumit, setSumit] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -221,7 +222,7 @@ const SignIn = () => {
   const responseGoogle = async (authResult) => {
     try {
       if (authResult['code']) {
-        setLoading(true);
+        setSumit(true);
         setButtonDisabled(true);
         try {
           // Send the code to the backend for authentication
@@ -338,7 +339,7 @@ const SignIn = () => {
       showToast("An unexpected error occurred. Please try again later.", "error");
     } finally {
       // Reset loading and disabled states
-      setLoading(false);
+      setSumit(false);
       setButtonDisabled(false);
     }
   };
@@ -444,12 +445,14 @@ const SubTitle = styled.h2`
         <Button
   text="SignIn"
   onClick={handelSignIn}
-  // isLoading={loading}  // Properly passing to custom Button
+  isLoading={loading}  // Properly passing to custom Button
   isDisabled={buttonDisabled}
 />
 <Button
   text="Continue With Google"
   onClick={googleLogin}
+  isLoading={sumit}  // Properly passing to custom Button
+  isDisabled={buttonDisabled}
 />
 
         
