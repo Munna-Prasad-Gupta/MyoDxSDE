@@ -1,66 +1,10 @@
-# import sys
-# import json
-
-# try:
-#     # Parse the input data
-#     input_json = sys.argv[1]
-#     input_data = json.loads(input_json)
-
-    
-#     print("Received data:", json.dumps(input_data), file=sys.stderr)
-
-#     # Process the input (e.g., make a prediction)
-#     age = int(input_data["age"])  # Ensure you are using the correct key from the input data
-#     if age > 30:
-#         prediction = "High Risk"
-#     else:
-#         prediction = "Low Risk"
-
-#     # Output only the prediction in JSON format
-#     print(json.dumps({"prediction": prediction}))
-
-# except (IndexError, json.JSONDecodeError) as e:
-#     print(f"Error: {e}")
-#     print("Make sure to pass valid JSON input.")
-
-
-
-
-
-# import sys
-# import json
-
-# try:
-#     input_json = sys.argv[1]
-#     input_data = json.loads(input_json)
-
-#     print("Received data:", json.dumps(input_data), file=sys.stderr)
-
-#     age = int(input_data["age"])
-#     prediction = "High Risk" if age > 30 else "Low Risk"
-
-#     # Example scores (you can compute these based on logic if needed)
-#     score1 = 23
-#     score2 = 46
-
-#     result = {
-#         "prediction": prediction,
-#         "score1": score1,
-#         "score2": score2
-#     }
-
-#     print(json.dumps(result))
-
-# except (IndexError, json.JSONDecodeError) as e:
-#     print(f"Error: {e}", file=sys.stderr)
-
-
 
 
 import sys
 import json
 import joblib
 import pandas as pd
+import os
 print(pd.__version__)
 
 import sys
@@ -79,7 +23,10 @@ def predict_input(user_input_dict):
         dict: Contains predicted diagnosis label ("Yes" or "No"), diagnosis score, and risk percentage.
     """
     # Load model, label encoder, and feature list
-    model, label_encoder, feature_names = joblib.load("D:/mdProject/mdProject/server/model-wrapper/diagnosis_model.pkl")
+    # model, label_encoder, feature_names = joblib.load("D:/mdProject/mdProject/server/model-wrapper/diagnosis_model.pkl")
+    model_path = os.path.join(os.path.dirname(__file__), 'diagnosis_model.pkl')
+    # Load the model
+    model, label_encoder, feature_names = joblib.load(model_path)
 
     # Convert input to DataFrame
     input_df = pd.DataFrame([user_input_dict])
