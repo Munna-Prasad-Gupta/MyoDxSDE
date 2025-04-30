@@ -111,7 +111,7 @@ const SignIn = () => {
     console.log("Email in frontend:", email);  // Log email
     console.log("Password:", password);  // Log password
 
-    if (validateInputs()) {
+  if (validateInputs()) {
         try {
             const res = await UserSignIn({ email, password });
 
@@ -216,6 +216,8 @@ const SignIn = () => {
             // window.location.reload();
         }
     }
+    setLoading(false);
+    setButtonDisabled(false);
 };
 
 
