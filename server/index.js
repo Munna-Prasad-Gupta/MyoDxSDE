@@ -109,6 +109,15 @@ app.post("/api/model/predict", async (req, res) => {
   }
 });
 
+
+// Serve React app for all non-API routes
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Catch-all handler for any routes not matched by the API
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello From developers from Team17 Munna Prasad , Alla Tharun and Sai Govardhan" });
 });

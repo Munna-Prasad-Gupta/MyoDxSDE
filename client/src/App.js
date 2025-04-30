@@ -57,14 +57,19 @@ function App() {
             {/* Public Routes */}
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route
+            {/* <Route
               path="*"
               element={
                 <Container>
                   {!currentUser ? <Authentication /> : <ProtectedRoutes currentUser={currentUser} />}
                 </Container>
               }
-            />
+            /> */}
+            {currentUser ? (
+              <Route path="/*" element={<ProtectedRoutes currentUser={currentUser} />} />
+            ) : (
+              <Route path="/*" element={<Authentication />} />
+            )}
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
