@@ -110,7 +110,7 @@ app.post("/api/model/predict", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "Hello developers from Team17" });
+  res.status(200).json({ message: "Hello From developers from Team17 Munna Prasad , Alla Tharun and Sai Govardhan" });
 });
 
 const connectDB = () => {
