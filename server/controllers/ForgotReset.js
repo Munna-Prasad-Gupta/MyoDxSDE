@@ -44,6 +44,7 @@ export const resetPass = async (req, res, next) => {
 export const veriTok = async (req, res, next) => {
     try {
         const resetToken = req.body.token;
+        console.log("REached in veriTok for reset ");
         const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
         const user = await User.findOne({
             resetPasswordToken: hashedToken,
@@ -53,6 +54,7 @@ export const veriTok = async (req, res, next) => {
         if (!user) {
             return res.status(400).json({ message: "Token invalid or expired" });
         }
+        console.log("Going to send token valide messagefrom controllers");
 
         return res.status(200).json({ message: "Token valid" });
     } catch (error) {

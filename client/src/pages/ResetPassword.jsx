@@ -7,7 +7,7 @@ function ResetPassword() {
     
     const { token } = useParams();
     const navigate = useNavigate();  // Use useNavigate for programmatic navigation
-    
+    console.log('Token received:', token);
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState(null);
@@ -16,14 +16,17 @@ const [isCheckingToken, setIsCheckingToken] = useState(true); // NEW
 
     // Validate the token
     useEffect(() => {
+
         const verifytoken = async () => {
             try {
+                console.log('Token received in verifytoken for calling backend :', token);
                 // Assume an API to validate the token exists
                 const response = await verifyToken({ token });
                 
                 if (response.status === 200) {
                     setIsTokenValid(true); // Token is valid
                 }
+                console.log('Token back from backend  in verifytoken for calling backend :', isTokenValid);
             } catch (err) {
                 if (err.response) {
                     // Handle different error statuses
