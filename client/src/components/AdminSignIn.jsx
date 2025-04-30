@@ -111,7 +111,9 @@ const SignIn = () => {
           setLoading(false);
           setButtonDisabled(false);
         });
-    }
+      }
+      setLoading(false);
+      setButtonDisabled(false);
 };
 
 
