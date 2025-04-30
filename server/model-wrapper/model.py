@@ -63,6 +63,11 @@ import joblib
 import pandas as pd
 print(pd.__version__)
 
+import sys
+print("Python executable path:", sys.executable)
+
+
+
 def predict_input(user_input_dict):
     """
     Predicts the diagnosis (Yes/No), diagnosis score, and risk percentage.
