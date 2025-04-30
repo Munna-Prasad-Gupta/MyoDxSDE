@@ -1,10 +1,22 @@
+# services:
+#   - type: web
+#     name: my-backend-service
+#     env: node
+#     buildCommand: |
+#       pip install -r ./server/model-wrapper/requirements.txt && npm install --prefix server
+#     startCommand: npm start --prefix server
+#     plan: free
+#     regions:
+#       - oregon
+
 services:
   - type: web
     name: my-backend-service
     env: node
     buildCommand: |
       pip install -r ./server/model-wrapper/requirements.txt && npm install --prefix server
-    startCommand: npm start --prefix server
+    startCommand: cd server && npm start
     plan: free
     regions:
       - oregon
+
