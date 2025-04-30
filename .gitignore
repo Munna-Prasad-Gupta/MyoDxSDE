@@ -17,5 +17,8 @@ Thumbs.db
 # IDE folders
 .vscode/
 
+# Build folder
+/build
+
 # Don't ignore .pkl!
 # (Make sure this line is NOT here: *.pkl)
